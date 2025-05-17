@@ -19,34 +19,35 @@ const AuthModal = ({ isOpen, onClose, onLoginSuccess }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     const { email, password, confirmPassword } = formData;
-
+  
     if (!email || !password) {
       toast.error("Please fill in all fields");
       return;
     }
-
+  
     if (!isLogin && password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
-
+  
     if (isLogin) {
       // Login: Check if user exists in localStorage
       const storedUser = localStorage.getItem("user");
       if (!storedUser) {
-        toast.error("No user found, please sign up first");
+        toast.error("No user found, switching to Sign Up");
+        setIsLogin(false); // Switch to signup mode
         return;
       }
-
+  
       const user = JSON.parse(storedUser);
-
+  
       if (user.email === email && user.password === password) {
         // Update isLoggedIn to true in localStorage
         const updatedUser = { ...user, isLoggedIn: true };
         localStorage.setItem("user", JSON.stringify(updatedUser));
-
+  
         toast.success("Logged in successfully!");
         window.location.reload();
         onLoginSuccess();
@@ -66,7 +67,7 @@ const AuthModal = ({ isOpen, onClose, onLoginSuccess }) => {
       onClose();
     }
   };
-
+  
   if (!isOpen) return null;
 
   return (
