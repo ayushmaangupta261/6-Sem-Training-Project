@@ -2,6 +2,11 @@
 
 A React application featuring user authentication with login/logout functionality, and displaying movie content such as sliders, production houses, and genre-based movie lists.
 
+## Live Demo
+
+[https://six-sem-training-project.onrender.com](https://six-sem-training-project.onrender.com)
+
+
 ## Features
 
 - User login and logout with localStorage persistence
